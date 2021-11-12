@@ -1,0 +1,3 @@
+PHONE: +420 725 143 422 (SMS only)
+EMAIL: 1816cookie.1816@gmail.com
+DISCORD: COOKIE # 1816
