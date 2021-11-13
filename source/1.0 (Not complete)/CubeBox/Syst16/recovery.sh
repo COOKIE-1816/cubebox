@@ -1,0 +1,1 @@
+run ./scripter/reco.c
