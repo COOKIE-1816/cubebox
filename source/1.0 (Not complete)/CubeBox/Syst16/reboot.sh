@@ -1,1 +1,0 @@
-run ./scripter/reboot.c

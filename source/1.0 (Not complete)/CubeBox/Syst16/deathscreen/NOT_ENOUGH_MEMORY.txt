@@ -1,9 +1,0 @@
-Computer has crashed.
-Make sure you installed enough RAM memory.
-
-***TECHNICAL INFORMATION
-Reason: NOT_ENOUGH_MEMORY
-Error code: 16x50062
-***
-
-Press any key to continue...

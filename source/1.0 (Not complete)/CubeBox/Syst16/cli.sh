@@ -1,1 +1,0 @@
-run ./scripter/cli.c
