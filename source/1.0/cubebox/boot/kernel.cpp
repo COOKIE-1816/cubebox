@@ -134,10 +134,7 @@ class PrintfTCPHandler : public TransmissionControlProtocolHandler{
 				&& data[7] == 'T'
 				&& data[8] == 'T'
 				&& data[9] == 'P'
-			){
-				socket->Send((uint8_t*)"HTTP/1.1 200 OK\r\nServer: MyOS\r\nContent-Type: text/html\r\n\r\n<html><head><title>My Operating System</title></head><body><b>My Operating System</b> http://www.AlgorithMan.de</body></html>\r\n",184);
-				socket->Disconnect();
-			}
+			){}
 			return true;
 		}
 };
@@ -160,7 +157,7 @@ extern "C" void callConstructors(){
 		(*i)();
 }
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t){
-	printf("Hello World! --- http://www.AlgorithMan.de\n");
+	printf("Kernel: Return p000x2001\n");
 	GlobalDescriptorTable gdt;
 	uint32_t* memupper = (uint32_t*)(((size_t)multiboot_structure) + 8);
 	size_t heap = 10*1024*1024;
@@ -224,7 +221,7 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t){
 	printf("\nS-ATA primary slave: ");
 	AdvancedTechnologyAttachment ata0s(false, 0x1F0);
 	ata0s.Identify();
-	ata0s.Write28(0, (uint8_t*)"http://www.AlgorithMan.de", 25);
+	ata0s.Write28(0, (uint8_t*)"null", 25);
 	ata0s.Flush();
 	ata0s.Read28(0, 25);
 	printf("\nS-ATA secondary master: ");
@@ -262,12 +259,12 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t){
 	PrintfTCPHandler tcphandler;
 	TransmissionControlProtocolSocket* tcpsocket = tcp.Listen(1234);
 	tcp.Bind(tcpsocket, &tcphandler);
-	tcpsocket->Send((uint8_t*)"Hello TCP!", 10);
+	tcpsocket->Send((uint8_t*)"TCP", 10);
 	icmp.RequestEchoReply(gip_be);
 	PrintfUDPHandler udphandler;
 	UserDatagramProtocolSocket* udpsocket = udp.Connect(gip_be, 1234);
 	udp.Bind(udpsocket, &udphandler);
-	udpsocket->Send((uint8_t*)"Hello UDP!", 10);
+	udpsocket->Send((uint8_t*)"UDP", 10);
 	UserDatagramProtocolSocket* udpsocket = udp.Listen(1234);
 	udp.Bind(udpsocket, &udphandler);
 	while(1){
